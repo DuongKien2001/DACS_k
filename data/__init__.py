@@ -22,8 +22,8 @@ def get_data_path(name):
     :param config_file:
     """
     if name == 'cityscapes':
-        return '../data/CityScapes/'
+        return '/kaggle/input/cityscapes/Cityspaces'
     if name == 'gta' or name == 'gtaUniform':
-        return '../data/gta/'
+        return '/kaggle/input/gtav-dataset/GTAV'
     if name == 'synthia':
         return '../data/RAND_CITYSCAPES'
