@@ -180,7 +180,7 @@ def evaluate(model, dataset, ignore_label=250, save_output_images=False, save_di
                 gt = np.asarray(label[0].numpy(), dtype=np.int32)
 
             output = output.transpose(1,2,0)
-            output = np.asarray(np.argmax(output, axis=2), dtype=np.int31)
+            output = np.asarray(np.argmax(output, axis=2), dtype=np.int32)
 
             data_list.append([gt.flatten(), output.flatten()])
 
