@@ -175,12 +175,12 @@ def evaluate(model, dataset, ignore_label=250, save_output_images=False, save_di
             output = output.cpu().data[0].numpy()
 
             if dataset == 'cityscapes':
-                gt = np.asarray(label[0].numpy(), dtype=np.int)
+                gt = np.asarray(label[0].numpy(), dtype=np.int32)
             elif dataset == 'gta':
-                gt = np.asarray(label[0].numpy(), dtype=np.int)
+                gt = np.asarray(label[0].numpy(), dtype=np.int32)
 
             output = output.transpose(1,2,0)
-            output = np.asarray(np.argmax(output, axis=2), dtype=np.int)
+            output = np.asarray(np.argmax(output, axis=2), dtype=np.int31)
 
             data_list.append([gt.flatten(), output.flatten()])
 
@@ -208,10 +208,10 @@ def main():
 
     checkpoint = torch.load(args.model_path)
     try:
-        model.load_state_dict(checkpoint['model'])
+        model.load_state_dict(checkpoint['ema_model'])
     except:
         model = torch.nn.DataParallel(model, device_ids=args.gpu)
-        model.load_state_dict(checkpoint['model'])
+        model.load_state_dict(checkpoint['ema_model'])
 
     model.cuda()
     model.eval()
